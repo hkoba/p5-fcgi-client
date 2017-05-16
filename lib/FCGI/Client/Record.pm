@@ -1,12 +1,13 @@
 package FCGI::Client::Record;
 use strict;
 use warnings;
-use Any::Moose;
+use Moo;
+use Types::Standard qw(Str);
 use FCGI::Client::Constant;
 use FCGI::Client::RecordHeader;
 
-has header     => ( is => 'ro', isa => 'FCGI::Client::RecordHeader', handles => [qw/request_id content_length type/] );
-has content    => ( is => 'ro', isa => 'Str' );
+has header     => ( is => 'ro', isa => sub {UNIVERSAL::isa($_[0], 'FCGI::Client::RecordHeader')}, handles => [qw/request_id content_length type/] );
+has content    => ( is => 'ro', isa => Str );
 
 __PACKAGE__->meta->make_immutable;
 __END__

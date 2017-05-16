@@ -1,7 +1,8 @@
 package FCGI::Client::Connection;
 use strict;
 use warnings;
-use Any::Moose;
+use Moo;
+use Types::Standard qw(Int);
 use FCGI::Client::Constant;
 use Time::HiRes qw(time);
 use List::Util qw(max);
@@ -16,7 +17,7 @@ has sock => (
 
 has timeout => (
     is => 'rw',
-    isa => 'Int',
+    isa => Int,
     default => 10,
 );
 
